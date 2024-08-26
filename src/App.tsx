@@ -1,9 +1,10 @@
-function App() {
+import { RootLayout } from './components/layout'
 
+function App() {
   return (
-    <>
-    <h1>FastApi + ReactJs Project</h1>
-   </>
+    <RootLayout>
+
+    </RootLayout>
   )
 }
 

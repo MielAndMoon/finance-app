@@ -7,8 +7,9 @@ interface Props {
 
 export const TransactionList = ({ transactions }: Props) => {
   return (
-    <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-      <section className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+    <main className="flex flex-col gap-4 md:gap-8 p-6 col-span-2">
+      <CardTitle className="text-lg">Transactions</CardTitle>
+      <section className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
         {transactions.map((transaction) => (
           <Card key={transaction.id}>
             <CardHeader className="flex flex-row items-center space-y-0 pb-2">

@@ -2,10 +2,17 @@ import { useEffect, useState } from 'react'
 import { fetchTransactions } from './api/api'
 import { TransactionList } from './components/TransactionList'
 import { RootLayout } from './components/layout'
-import type { TransactionModel } from './types'
+import type { Transaction, TransactionModel } from './types'
 
 function App() {
   const [transactions, setTransactions] = useState<Array<TransactionModel>>([])
+  const [formTransaction, setFormTransaction] = useState<Transaction>({
+    amount: 0,
+    category: '',
+    description: '',
+    is_income: false,
+    date: '',
+  })
 
   useEffect(() => {
     const getTransactions = async () => {

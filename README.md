@@ -10,8 +10,6 @@ A web-based finance management tool built with React, TypeScript, Vite, Shadcn/U
   - [Installation](#installation)
   - [Building for Production](#building-for-production)
 - [API Integration](#api-integration)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 

@@ -14,15 +14,18 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { InputControl } from './components/InputControl'
 import { Navbar } from './components/Navbar'
 
+const INITIAL_STATE_FORM: Transaction = {
+  amount: 0,
+  category: '',
+  description: '',
+  is_income: false,
+  date: '',
+}
+
 function App() {
   const [transactions, setTransactions] = useState<Array<TransactionModel>>([])
-  const [formTransaction, setFormTransaction] = useState<Transaction>({
-    amount: 0,
-    category: '',
-    description: '',
-    is_income: false,
-    date: '',
-  })
+  const [formTransaction, setFormTransaction] =
+    useState<Transaction>(INITIAL_STATE_FORM)
 
   const getTransactions = useCallback(async () => {
     try {
@@ -36,6 +39,20 @@ function App() {
   useEffect(() => {
     getTransactions()
   }, [getTransactions])
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    try {
+      const newTransaction = await insertTransaction(
+        'http://localhost:8000/transactions',
+        formTransaction,
+      )
+      await getTransactions()
+      setFormTransaction(INITIAL_STATE_FORM)
+    } catch (error) {
+      console.log('Error to add the transaction', error)
+    }
+  }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormTransaction({
@@ -63,7 +80,7 @@ function App() {
       <div className="grid px-12">
         <Navbar />
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-2">
-          <FormTransaction onSubmit={}>
+          <FormTransaction onSubmit={handleSubmit}>
             <InputControl
               label="description"
               onChange={handleChange}

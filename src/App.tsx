@@ -13,6 +13,7 @@ import { FormTransaction } from './components/FormTransaction'
 import { Checkbox } from '@/components/ui/checkbox'
 import { InputControl } from './components/InputControl'
 import { Navbar } from './components/Navbar'
+import { useToast } from '@/components/ui/use-toast'
 
 const INITIAL_STATE_FORM: Transaction = {
   amount: 0,
@@ -26,6 +27,7 @@ function App() {
   const [transactions, setTransactions] = useState<Array<TransactionModel>>([])
   const [formTransaction, setFormTransaction] =
     useState<Transaction>(INITIAL_STATE_FORM)
+  const { toast } = useToast()
 
   const getTransactions = useCallback(async () => {
     try {
@@ -49,6 +51,9 @@ function App() {
       )
       await getTransactions()
       setFormTransaction(INITIAL_STATE_FORM)
+      toast({
+        title: 'Success adding new transaction',
+      })
     } catch (error) {
       console.log('Error to add the transaction', error)
     }
